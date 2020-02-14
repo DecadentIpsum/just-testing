@@ -10,34 +10,38 @@ const getData = graphql`
         siteDesc: description
         author
         siteUrl
-        image
+        siteImage: image
         twitterUsername
       }
     }
   }
 `
 
-const SEO = ({ title, description }) => {
+const SEO = ({ title, description, slug, image }) => {
+  console.log(image)
   const { site } = useStaticQuery(getData)
 
   const {
     siteDesc,
     siteTitle,
     siteUrl,
-    image,
+    siteImage,
     twitterUsername,
   } = site.siteMetadata
 
   return (
     <Helmet htmlAttributes={{ lang: "en" }} title={`${title} | ${siteTitle}`}>
       <meta name="description" content={description || siteDesc} />
-      <meta name="image" content={image} />
+      <meta name="image" content={siteImage} />
       {/* facebook cards */}
-      <meta property="og:url" content={siteUrl} />
+      <meta property="og:url" content={`${siteUrl}/blog/${slug}` || siteUrl} />
       <meta property="og:type" content="website" />
-      <meta property="og:title" content={siteTitle} />
-      <meta property="og:description" content={siteDesc} />
-      <meta property="og:image" content={`${siteUrl}${image}`} />
+      <meta property="og:title" content={title} />
+      <meta property="og:description" content={description || siteDesc} />
+      <meta
+        property="og:image"
+        content={image.fluid.src || `${siteUrl}${siteImage}`}
+      />
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="630" />
       {/* twitter card */}
@@ -45,7 +49,7 @@ const SEO = ({ title, description }) => {
       <meta name="twitter:creator" content={twitterUsername} />
       <meta name="twitter:title" content={siteTitle} />
       <meta name="twitter:description" content={siteDesc} />
-      <meta name="twitter:image" content={`${siteUrl}${image}`} />
+      <meta name="twitter:image" content={`${siteUrl}${siteImage}`} />
     </Helmet>
   )
 }
