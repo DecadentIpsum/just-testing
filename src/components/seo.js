@@ -38,10 +38,7 @@ const SEO = ({ title, description, slug, image }) => {
       <meta property="og:type" content="website" />
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description || siteDesc} />
-      <meta
-        property="og:image"
-        content={image.file.url || `${siteUrl}${siteImage}`}
-      />
+      <meta property="og:image" content={`${siteUrl}${siteImage}`} />
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="630" />
       {/* twitter card */}
