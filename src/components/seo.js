@@ -40,7 +40,7 @@ const SEO = ({ title, description, slug, image }) => {
       <meta property="og:description" content={description || siteDesc} />
       <meta
         property="og:image"
-        content={image.fluid.src || `${siteUrl}${siteImage}`}
+        content={image.file.url || `${siteUrl}${siteImage}`}
       />
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="630" />
