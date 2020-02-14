@@ -18,7 +18,7 @@ const getData = graphql`
 `
 
 const SEO = ({ title, description, slug, image }) => {
-  console.log(image)
+  console.log("image", image)
   const { site } = useStaticQuery(getData)
 
   const {
@@ -34,11 +34,17 @@ const SEO = ({ title, description, slug, image }) => {
       <meta name="description" content={description || siteDesc} />
       <meta name="image" content={siteImage} />
       {/* facebook cards */}
-      <meta property="og:url" content={`${siteUrl}/blog/${slug}` || siteUrl} />
+      <meta
+        property="og:url"
+        content={slug ? `${siteUrl}/blog/${slug}` : siteUrl}
+      />
       <meta property="og:type" content="website" />
       <meta property="og:title" content={title || siteTitle} />
       <meta property="og:description" content={description || siteDesc} />
-      <meta property="og:image" content={`${siteUrl}${siteImage}`} />
+      <meta
+        property="og:image"
+        content={image ? image : `${siteUrl}${siteImage}`}
+      />
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="630" />
       {/* twitter card */}
